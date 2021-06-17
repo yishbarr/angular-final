@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../employees.model';
+import { EmployeesService } from '../employees.service';
 
 @Component({
   selector: 'app-employees-table',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesTableComponent implements OnInit {
 
-  constructor() { }
+  list;
+  wagesRow = {}
+  constructor(private service: EmployeesService) { }
 
   ngOnInit(): void {
+    this.list = this.service.getEmployees();
+  }
+  wagesColour(employee: Employee) {
+    let wage = employee.hourlyWage * employee.hoursPerMonth;
+    let colour = wage < 3000 ? "table-danger" : "table-primary";
+    this.wagesRow = { ...this.wagesRow, [employee.id]: { colour: colour, wage: wage } }
+    return this.wagesRow[employee.id].colour;
   }
 
 }

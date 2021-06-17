@@ -10,10 +10,11 @@ export class Pupil extends Person {
     }
     private _grades: Grade[];
     public get grades(): Grade[] {
-        this._grades.length = 3;
         return this._grades;
     }
     public set grades(value: Grade[]) {
+        if (value.length > 3)
+            value.length = 3
         this._grades = value;
     }
     constructor(
@@ -30,7 +31,7 @@ export class Pupil extends Person {
         this.grades = grades;
     }
 }
-interface Grade {
+export interface Grade {
     prof: string;
     grade: number;
 }

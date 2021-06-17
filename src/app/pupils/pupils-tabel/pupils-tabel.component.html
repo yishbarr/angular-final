@@ -1,1 +1,24 @@
-<p>pupils-tabel works!</p>
+<div class="d-flex flex-wrap container" style="margin-top: 10px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Average Grade</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-color: black;" *ngFor="let pupil of list|async" [class]=gradesAvgColour(pupil)>
+                <td scope="row">{{pupil.fullname}}</td>
+                <td>{{pupil.id}}</td>
+                <td>{{pupil.age}}</td>
+                <td>{{pupil.city}}</td>
+                <td>{{gradesRow[pupil.id].avg}}</td>
+                <td><button class="btn btn-info" routerLink="/pupils/{{pupil.id}}">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

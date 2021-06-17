@@ -1,1 +1,13 @@
-<p>teacher-list works!</p>
+<div class="d-flex flex-wrap container" style="margin-top: 10px;">
+    <div class="card bg-dark rounded" style="width: 18rem; border-color: gray;" *ngFor="let t of list|async">
+        <img class="card-img-top" [src]=t.photo alt="Image">
+        <div class="card-body">
+            <h5 class="card-title">{{t.fullname}}</h5>
+            <p>ID: {{t.id}}</p>
+            <p>Age: {{t.age}}</p>
+            <p>City: {{t.city}}</p>
+            <p>Wage: {{t.hoursPerMonth*t.hourlyWage}} NIS</p>
+            <a routerLink="/teachers/{{t.id}}" class="btn btn-danger">Edit</a>
+        </div>
+    </div>
+</div>

@@ -22,4 +22,19 @@ export class Employee extends Person implements Staff {
     public set hourlyWage(value: number) {
         this._hourlyWage = value > 0 ? value : 1;
     }
+
+    constructor(
+        id: string | number,
+        name: string,
+        age: number,
+        city: string,
+        photo: string,
+        job: string, hoursPerMonth: number,
+        wage: number
+    ) {
+        super(id, name, age, city, photo);
+        this.job = job;
+        this.hoursPerMonth = hoursPerMonth;
+        this.hourlyWage = wage;
+    }
 }

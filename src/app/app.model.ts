@@ -5,7 +5,7 @@ export class Person {
     public get id(): string {
         return this._id;
     }
-    public set id(value: number | string) {
+    public set id(value: string) {
         this._id = value + "";
     }
     private _fullname: string;
@@ -37,7 +37,7 @@ export class Person {
         this._photo = value;
     }
     constructor(id: string | number, name: string, age: number, city: string, photo: string) {
-        this.id = id;
+        this.id = id + "";
         this.fullname = name;
         this.age = age;
         this.city = city;
@@ -46,7 +46,7 @@ export class Person {
 }
 export class SchoolClass {
     private _id: string;
-    public get id(): string {
+    public get id(): string | number {
         return this._id;
     }
     public set id(value: string | number) {
@@ -92,4 +92,7 @@ export class SchoolClass {
 export interface Staff {
     hoursPerMonth: number;
     hourlyWage: number;
+}
+export interface Editor {
+    applyChanges();
 }

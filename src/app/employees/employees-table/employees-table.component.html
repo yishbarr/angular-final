@@ -1,1 +1,30 @@
-<p>employees-table works!</p>
+<div class="d-flex flex-wrap container" style="margin-top: 10px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Job</th>
+                <th>Hours Per Month</th>
+                <th>Hourly Wage</th>
+                <th>Monthly Wage</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-color: black;" *ngFor="let employee of list|async" [class]=wagesColour(employee)>
+                <td>{{employee.fullname}}</td>
+                <td>{{employee.id}}</td>
+                <td>{{employee.age}}</td>
+                <td>{{employee.city}}</td>
+                <td>{{employee.job}}</td>
+                <td>{{employee.hoursPerMonth}}</td>
+                <td>{{employee.hourlyWage}}</td>
+                <td>{{wagesRow[employee.id].wage}}</td>
+                <td><button class="btn btn-primary" routerLink="/employees/{{employee.id}}">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
