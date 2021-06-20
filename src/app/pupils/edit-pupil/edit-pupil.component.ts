@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Editor } from 'src/app/app.model';
+import { map, switchMap } from 'rxjs/operators';
+import { Editor, SchoolClass } from 'src/app/app.model';
 import { Pupil } from '../pupils.model';
 import { PupilsService } from '../pupils.service';
 
@@ -16,11 +16,18 @@ export class EditPupilComponent implements OnInit, Editor {
   pupil: Observable<Pupil>;
   pupilObj: Pupil;
 
+  classes: Observable<SchoolClass[]>;
+  classesObj;
+
   fullName: string;
   id: string;
   age: number;
   city: string;
   photo: string;
+  schoolClass: SchoolClass;
+
+  classTick: {};
+
   constructor(private service: PupilsService, private route: ActivatedRoute) { }
 
 
@@ -39,6 +46,10 @@ export class EditPupilComponent implements OnInit, Editor {
     this.age = this.pupilObj.age;
     this.city = this.pupilObj.city;
     this.photo = this.pupilObj.photo;
+    this.schoolClass = this.pupilObj.schoolClass;
+
+    this.classes = this.service.getClasses();
+    this.classTick = { [this.schoolClass.id]: true }
   }
 
   applyChanges() {
@@ -47,5 +58,12 @@ export class EditPupilComponent implements OnInit, Editor {
     this.pupilObj.age = this.age;
     this.pupilObj.city = this.city;
     this.pupilObj.photo = this.photo;
+    this.pupilObj.schoolClass = this.schoolClass
+
+    this.pupil.pipe(map(p => this.pupilObj))
+  }
+
+  chooseClass(event) {
+    this.classes.subscribe(c => this.schoolClass = c.find(sclass => sclass.id == event.target.value))
   }
 }

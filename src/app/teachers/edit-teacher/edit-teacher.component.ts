@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Editor, SchoolClass } from 'src/app/app.model';
 import { Teacher } from '../teachers.model';
 import { TeachersService } from '../teachers.service';
@@ -69,7 +69,7 @@ export class EditTeacherComponent implements OnInit, Editor {
     this.teacherObj.photo = this.photo;
     this.teacherObj.seniority = this.seniority;
 
-    this.teacher.subscribe(t => t = this.teacherObj);
+    this.teacher.pipe(map(t => this.teacherObj));
   }
 
   tick(event) {

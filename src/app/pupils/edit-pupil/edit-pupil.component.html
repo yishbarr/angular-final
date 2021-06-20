@@ -9,6 +9,13 @@
     <input class="form-control" type="text" [(ngModel)]=city>
     <label>Photo URL</label>
     <input class="form-control" type="url" [(ngModel)]=photo>
+    <label>Class</label>
+    <div class="form-check" *ngFor="let class of classes|async">
+        <input class="form-check-input" type="radio" value="{{class.id}}" name="classChoice" id="{{class.id}}"
+            (click)=chooseClass($event) [checked]=classTick[class.id]>
+        <label class="form-check-label">{{class.name}}</label>
+    </div>
     <br>
     <button class="btn btn-success" (click)=applyChanges()>Apply</button>
+
 </div>

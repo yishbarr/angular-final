@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+import { Pupil } from "./pupils/pupils.model";
 import { Teacher } from "./teachers/teachers.model";
 
 export class Person {
@@ -94,5 +96,11 @@ export interface Staff {
     hourlyWage: number;
 }
 export interface Editor {
-    applyChanges();
+    applyChanges(): void;
+}
+export interface iGetClasses {
+    getClasses(): Observable<SchoolClass[]>;
+}
+export interface iGetPupils{
+    getPupils():Observable<Pupil[]>
 }
