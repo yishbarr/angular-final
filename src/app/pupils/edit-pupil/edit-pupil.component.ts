@@ -59,8 +59,6 @@ export class EditPupilComponent implements OnInit, Editor {
     this.pupilObj.city = this.city;
     this.pupilObj.photo = this.photo;
     this.pupilObj.schoolClass = this.schoolClass
-
-    this.pupil.pipe(map(p => this.pupilObj))
   }
 
   chooseClass(event) {

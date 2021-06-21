@@ -68,8 +68,6 @@ export class EditTeacherComponent implements OnInit, Editor {
     this.teacherObj.id = this.id;
     this.teacherObj.photo = this.photo;
     this.teacherObj.seniority = this.seniority;
-
-    this.teacher.pipe(map(t => this.teacherObj));
   }
 
   tick(event) {
