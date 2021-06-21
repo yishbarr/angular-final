@@ -9,6 +9,21 @@
     <input class="form-control" type="text" [(ngModel)]=city>
     <label>Photo URL</label>
     <input class="form-control" type="url" [(ngModel)]=photo>
+    <label>Grades</label>
+    <div class="row" *ngFor="let grade of grades" style="margin-top: 3px;">
+        <div class="col">
+            <input class="form-control" placeholder="Subject" [(ngModel)]=grade.prof>
+        </div>
+        <div class="col">
+            <input class="form-control" placeholder="Grade" [(ngModel)]=grade.grade>
+        </div>
+        <div class="col">
+            <button style="color: white;" class="btn" value={{grade.prof}} (click)=removeGrade($event)>- Remove Grade</button>
+        </div>
+    </div>
+    <br>
+    <button *ngIf="grades.length<3" style="color: white;" class="btn" (click)=addGrade()>+ Add Grade</button>
+    <br><br>
     <label>Class</label>
     <div class="form-check" *ngFor="let class of classes|async">
         <input class="form-check-input" type="radio" value="{{class.id}}" name="classChoice" id="{{class.id}}"

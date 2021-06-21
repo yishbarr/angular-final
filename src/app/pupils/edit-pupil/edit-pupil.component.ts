@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Editor, SchoolClass } from 'src/app/app.model';
-import { Pupil } from '../pupils.model';
+import { Grade, Pupil } from '../pupils.model';
 import { PupilsService } from '../pupils.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class EditPupilComponent implements OnInit, Editor {
   city: string;
   photo: string;
   schoolClass: SchoolClass;
+  grades: Grade[]
 
   classTick: {};
 
@@ -47,9 +48,10 @@ export class EditPupilComponent implements OnInit, Editor {
     this.city = this.pupilObj.city;
     this.photo = this.pupilObj.photo;
     this.schoolClass = this.pupilObj.schoolClass;
+    this.grades = this.pupilObj.grades;
 
     this.classes = this.service.getClasses();
-    this.classTick = { [this.schoolClass.id]: true }
+    this.classTick = { [this.schoolClass.id]: true };
   }
 
   applyChanges() {
@@ -58,10 +60,19 @@ export class EditPupilComponent implements OnInit, Editor {
     this.pupilObj.age = this.age;
     this.pupilObj.city = this.city;
     this.pupilObj.photo = this.photo;
-    this.pupilObj.schoolClass = this.schoolClass
+    this.pupilObj.schoolClass = this.schoolClass;
+
+    this.pupilObj.grades = this.grades.filter(g => g.prof != "");
   }
 
   chooseClass(event) {
     this.classes.subscribe(c => this.schoolClass = c.find(sclass => sclass.id == event.target.value))
+  }
+
+  addGrade() {
+    this.grades.push({ prof: "", grade: 0 })
+  }
+  removeGrade(event) {
+    this.grades = this.grades.filter(g => g.prof != event.target.value)
   }
 }

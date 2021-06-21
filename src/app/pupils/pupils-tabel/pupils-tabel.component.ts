@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Pupil, Grade } from '../pupils.model';
+import { Pupil } from '../pupils.model';
 import { PupilsService } from '../pupils.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class PupilsTabelComponent implements OnInit {
 
   gradesAvgColour(pupil) {
     let sum = 0;
-    pupil.grades.forEach(g => sum += g.grade);
+    pupil.grades.forEach(g => sum += Number(g.grade));
     let avg = Math.round(sum / pupil.grades.length);
     let colour = avg < 65 ? "bg-danger" : "bg-primary";
     this.gradesRow = { ...this.gradesRow, [pupil.id]: { colour: colour, avg: avg } }
